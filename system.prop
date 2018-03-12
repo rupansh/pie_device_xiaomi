@@ -76,6 +76,7 @@ persist.ts.rtmakeup=true
 
 # CNE/DPM
 persist.cne.feature=1
+#persist.vendor.dpm.feature=0
 persist.vendor.dpm.feature=11
 
 # Display
