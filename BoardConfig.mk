@@ -199,7 +199,10 @@ TARGET_USERIMAGES_USE_F2FS := true
 # Peripheral manager
 TARGET_PER_MGR_ENABLED := true
 
-# QCOM support
+# Properties
+TARGET_SYSTEM_PROP := $(DEVICE_PATH)/system.prop
+
+# Qualcomm
 BOARD_USES_QCOM_HARDWARE := true
 TARGET_USE_SDCLANG := true
 
