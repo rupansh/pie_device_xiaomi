@@ -68,7 +68,8 @@ LOCAL_C_INCLUDES := \
         hardware/qcom/media-caf/mm-core/inc \
         system/core/include/cutils \
         system/core/include/system \
-        system/media/camera/include/system
+        system/media/camera/include/system \
+        frameworks/native/include
 
 #HAL 1.0 Include paths
 LOCAL_C_INCLUDES += \
