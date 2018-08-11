@@ -140,6 +140,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.qcom.bluetooth.soc=rome
 
+# Bluetooth configs
+PRODUCT_COPY_FILES += \
+    device/xiaomi/land/bluetooth/bt_did.conf:system/etc/bluetooth/bt_did.conf \
+    device/xiaomi/land/bluetooth/bt_stack.conf:system/etc/bluetooth/bt_stack.conf
+
 # Property for loading BDA from bdaddress module in kernel
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.bt.bdaddr_path=/persist/bdaddr.txt
