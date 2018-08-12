@@ -122,30 +122,9 @@ PRODUCT_COPY_FILES += \
     $(TOPDIR)frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml
 
 
-# Bluetooth HAL
+# Bluetooth
 PRODUCT_PACKAGES += \
-    android.hardware.bluetooth@1.0-service \
-    android.hardware.bluetooth@1.0-impl \
-    android.hardware.bluetooth@1.0-impl:64 \
     libbt-vendor
-
-# Bluetooth SoC
-PRODUCT_PROPERTY_OVERRIDES += \
-    qcom.bluetooth.soc=rome
-
-# Bluetooth configs
-PRODUCT_COPY_FILES += \
-    device/xiaomi/land/bluetooth/bt_did.conf:system/etc/bluetooth/bt_did.conf \
-    device/xiaomi/land/bluetooth/bt_stack.conf:system/etc/bluetooth/bt_stack.conf
-
-# Property for loading BDA from bdaddress module in kernel
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.bt.bdaddr_path=/persist/bdaddr.txt
-
-# Bluetooth WiPower
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.bluetooth.emb_wp_mode=true \
-    ro.vendor.bluetooth.wipower=true
 
 # Camera
 PRODUCT_PACKAGES += \

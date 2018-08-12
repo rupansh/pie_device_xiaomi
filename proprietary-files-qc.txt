@@ -90,6 +90,9 @@ vendor/lib64/libbtnv.so
 vendor/lib64/libbt-hidlclient.so
 vendor/lib64/libbthost_if.so
 
+# Bluetooth (shared dependencies) - from tissot - OPM1.171019.026 V9.6.4.0.ODHMIFE
+vendor/lib64/com.qualcomm.qti.ant@1.0_vendor.so
+
 # Bluetooth (aptX) - from marlin - OPM1.171019.011
 lib/libaptX_encoder.so
 lib/libaptXHD_encoder.so
