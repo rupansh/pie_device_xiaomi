@@ -281,8 +281,11 @@ lib64/liblocationservice_jni.so
 etc/permissions/com.qti.location.sdk.xml
 etc/permissions/com.qualcomm.location.xml
 etc/permissions/izat.xt.srv.xml
--framework/com.qti.location.sdk.jar
--framework/izat.xt.srv.jar
+framework/com.qti.location.sdk.jar
+framework/izat.xt.srv.jar
+lib64/liblocationservice_jni.so
+lib64/libxt_native.so
+lib64/vendor.qti.gnss@1.0.so|392c70592a5759063ee9e09ebcb637bff04aa4fd
 -priv-app/com.qualcomm.location/com.qualcomm.location.apk
 vendor/bin/loc_launcher
 vendor/bin/lowi-server
@@ -343,7 +346,7 @@ vendor/lib64/libulp2.so
 vendor/lib64/libslimclient.so
 vendor/lib64/libxtadapter.so
 vendor/lib64/libxtwifi_ulp_adaptor.so
-vendor/lib64/vendor.qti.gnss@1.0_vendor.so
+vendor/lib64/vendor.qti.gnss@1.0_vendor.so|f7e9ee8e3804887a2f3939128e860767e6f27258
 
 # Graphics - from TA-1025 (Nokia 6)
 lib/egl/libGLES_android.so
