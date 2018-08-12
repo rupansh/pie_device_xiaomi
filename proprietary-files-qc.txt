@@ -699,20 +699,14 @@ vendor/lib64/vendor.qti.hardware.radio.uim_remote_client@1.0_vendor.so
 vendor/lib64/vendor.qti.hardware.radio.uim_remote_server@1.0_vendor.so
 vendor/radio/qcril_database/qcril.db
 
-# Radio - QTI Telephony - from gemini (Mi 5)
--framework/qti-telephony-common.jar
-
-# Radio - HAL - from whyred (Redmi Note 5 Pro)
-vendor/lib/libril-qc-qmi-1.so
-vendor/lib64/libril-qc-qmi-1.so
-
-# Radio - IMS - from TA-1025 (Nokia 6)
+# Radio - IMS - from tissot - OPM1.171019.026 V9.6.4.0.ODHMIFE
 -app/ims/ims.apk
--app/imssettings/imssettings.apk
+-app/uceShimService/uceShimService.apk
 etc/permissions/qti-vzw-ims-internal.xml
 lib/com.qualcomm.qti.imscmservice@1.0.so
 lib/lib-imscamera.so
 lib/lib-imsvideocodec.so
+lib/lib-imsvt.so
 lib/lib-imsvtextutils.so
 lib/lib-imsvtutils.so
 lib/libimscamera_jni.so
@@ -748,9 +742,6 @@ vendor/lib/lib-imsdpl.so
 vendor/lib/lib-imsqimf.so
 vendor/lib/lib-imsxml.so
 vendor/lib/lib-rtpcommon.so
-vendor/lib/lib-rtpcore.so
-vendor/lib/lib-rtpdaemoninterface.so
-vendor/lib/lib-rtpsl.so
 vendor/lib/lib-siputility.so
 vendor/lib/lib-uceservice.so
 vendor/lib/vendor.qti.hardware.radio.ims@1.0_vendor.so
