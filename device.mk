@@ -195,7 +195,7 @@ PRODUCT_PACKAGES += \
     libtinyxml
 
 PRODUCT_PACKAGES += \
-    android.hardware.graphics.allocator@2.0-impl:64 \
+    android.hardware.graphics.allocator@2.0-impl \
     android.hardware.graphics.allocator@2.0-service \
     android.hardware.graphics.mapper@2.0-impl \
     android.hardware.memtrack@1.0-impl \
@@ -211,7 +211,7 @@ PRODUCT_PACKAGES += \
     libprotobuf-cpp-lite
 
 PRODUCT_PACKAGES += \
-    android.hardware.drm@1.0-impl:32 \
+    android.hardware.drm@1.0-impl \
     android.hardware.drm@1.0-service \
     android.hardware.drm@1.0-service.widevine
 
@@ -226,7 +226,7 @@ PRODUCT_PACKAGES += \
 
 # Gatekeeper HAL
 PRODUCT_PACKAGES += \
-    android.hardware.gatekeeper@1.0-impl:64 \
+    android.hardware.gatekeeper@1.0-impl \
     android.hardware.gatekeeper@1.0-service
 
 # GNSS HAL
@@ -244,7 +244,6 @@ PRODUCT_PACKAGES += \
     libgnsspps \
     libcurl \
     libgps.utils \
-    android.hardware.gnss@1.0-impl:64 \
     android.hardware.gnss@1.0-impl
 
 PRODUCT_COPY_FILES += \
@@ -299,7 +298,7 @@ PRODUCT_COPY_FILES += \
 
 # Keymaster
 PRODUCT_PACKAGES += \
-    android.hardware.keymaster@3.0-impl:64 \
+    android.hardware.keymaster@3.0-impl \
     android.hardware.keymaster@3.0-service
 
 # Libshims
@@ -312,7 +311,7 @@ PRODUCT_PACKAGES += \
     lights.msm8937
 
 PRODUCT_PACKAGES += \
-    android.hardware.light@2.0-impl:64 \
+    android.hardware.light@2.0-impl \
     android.hardware.light@2.0-service
 
 # IRQ
@@ -403,8 +402,8 @@ PRODUCT_COPY_FILES += \
 
 # Sensors
 PRODUCT_PACKAGES += \
-    android.hardware.sensors@1.0-impl:64 \
-    android.hardware.contexthub@1.0-impl.nanohub:64    
+    android.hardware.sensors@1.0-impl \
+    android.hardware.contexthub@1.0-impl.nanohub    
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/sensors/hals.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/hals.conf \
