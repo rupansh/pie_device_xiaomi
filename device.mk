@@ -452,7 +452,15 @@ PRODUCT_PACKAGES += \
     libwpa_client \
     wpa_supplicant \
     wpa_supplicant.conf \
-    libwifikeystorehal
+    libwifikeystorehal \
+    android.hardware.wifi.offload@1.0:64 \
+    android.hardware.wifi.supplicant@1.0:64 \
+    android.hardware.wifi.supplicant@1.1:64 \
+    android.hardware.hostapd@1.0:64 \
+    android.hardware.wifi@1.0:64 \
+    android.hardware.wifi@1.1:64 \
+    android.hardware.wifi@1.2:64
+
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/hostapd.accept:system/etc/hostapd/hostapd.accept \
