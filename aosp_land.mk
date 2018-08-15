@@ -23,10 +23,10 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, $(LOCAL_PATH)/device.mk)
 
 # Call QCOM Util
-$(call inherit-product, $(DEVICE_PATH)/utils.mk)
+$(call inherit-product, $(LOCAL_PATH)/utils.mk)
 
 # Inherit some common Cypher stuff
-$(call inherit-product, vendor/aoscp/config/common_full_phone.mk)
+$(call inherit-product, vendor/aoscp/configs/common_full_phone.mk)
 
 PRODUCT_BRAND := Xiaomi
 PRODUCT_MODEL := Redmi 3S
