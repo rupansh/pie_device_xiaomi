@@ -188,7 +188,9 @@ PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-service \
     android.hardware.contexthub@1.0-service \
     android.hardware.sensors@1.0-service \
-    android.hardware.keymaster@3.0-service.rc
+    android.hardware.keymaster@3.0-service.rc \
+    android.hardware.graphics.composer@2.1-service \
+    android.hardware.graphics.mapper@2.0-service
 
 # Display
 PRODUCT_PACKAGES += \
