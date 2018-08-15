@@ -139,7 +139,7 @@ PRODUCT_PACKAGES += \
 
 # Bluetooth SoC
 PRODUCT_PROPERTY_OVERRIDES += \
-    vendor.qcom.bluetooth.soc=rome
+    qcom.bluetooth.soc=rome
 
 # Bluetooth configs
 PRODUCT_COPY_FILES += \
@@ -148,7 +148,7 @@ PRODUCT_COPY_FILES += \
 
 # Property for loading BDA from bdaddress module in kernel
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.bt.bdaddr_path=/persist/bdaddr.txt
+    ro.bt.bdaddr_path=/persist/bdaddr.txt
 
 # Bluetooth WiPower
 PRODUCT_PROPERTY_OVERRIDES += \
