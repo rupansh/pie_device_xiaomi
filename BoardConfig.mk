@@ -56,8 +56,6 @@ TARGET_KERNEL_SOURCE 		:= kernel/xiaomi/msm8937
 #
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
 
-# ANT
-BOARD_ANT_WIRELESS_DEVICE := "qualcomm-hidl"
 
 # Audio
 AUDIO_USE_LL_AS_PRIMARY_OUTPUT := true
