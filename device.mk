@@ -120,11 +120,6 @@ PRODUCT_COPY_FILES += \
     $(TOPDIR)frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml \
     $(TOPDIR)frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml
 
-# Enable AAudio MMAP/NOIRQ data path.
-# 2 is AAUDIO_POLICY_AUTO so it will try MMAP then fallback to Legacy path.
-PRODUCT_PROPERTY_OVERRIDES += aaudio.mmap_policy=2
-# Allow EXCLUSIVE then fall back to SHARED.
-PRODUCT_PROPERTY_OVERRIDES += aaudio.mmap_exclusive_policy=2
 
 # Bluetooth HAL
 PRODUCT_PACKAGES += \
