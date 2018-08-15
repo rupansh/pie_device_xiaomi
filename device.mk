@@ -99,10 +99,10 @@ PRODUCT_PACKAGES += \
     tinymix
 
 PRODUCT_PACKAGES += \
-    android.hardware.audio@2.0-impl \
-    android.hardware.audio@2.0-service \
-    android.hardware.audio.effect@2.0-impl \
-    android.hardware.soundtrigger@2.0-impl
+    android.hardware.audio@4.0-impl:32 \
+    android.hardware.audio@4.0-service \
+    android.hardware.audio.effect@4.0-impl:32 \
+    android.hardware.soundtrigger@2.1-impl:32
 
 # Audio mixer
 PRODUCT_COPY_FILES += \
@@ -126,9 +126,24 @@ PRODUCT_COPY_FILES += \
     $(TOPDIR)frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml
 
 
-# Bluetooth
+# Bluetooth HAL
 PRODUCT_PACKAGES += \
-    libbt-vendor
+    android.hardware.bluetooth@1.0-impl-qti:64 \
+    android.hardware.bluetooth@1.0-service-qti \
+    android.hardware.bluetooth@1.0-service-qti.rc
+
+# Bluetooth SoC
+PRODUCT_PROPERTY_OVERRIDES += \
+    vendor.qcom.bluetooth.soc=rome
+
+# Property for loading BDA from bdaddress module in kernel
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.bt.bdaddr_path=/persist/bdaddr.txt
+
+# Bluetooth WiPower
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.bluetooth.emb_wp_mode=true \
+    ro.vendor.bluetooth.wipower=true
 
 # Camera
 PRODUCT_PACKAGES += \
@@ -171,10 +186,10 @@ PRODUCT_PACKAGES += \
     libtinyxml
 
 PRODUCT_PACKAGES += \
-    android.hardware.graphics.allocator@2.0-impl \
+    android.hardware.graphics.allocator@2.0-impl:64 \
     android.hardware.graphics.allocator@2.0-service \
     android.hardware.graphics.mapper@2.0-impl \
-    android.hardware.graphics.composer@2.1-impl \
+    android.hardware.graphics.composer@2.1-impl:64 \
     android.hardware.graphics.composer@2.1-service \
     android.hardware.memtrack@1.0-impl \
     android.hardware.memtrack@1.0-service \
@@ -189,7 +204,7 @@ PRODUCT_PACKAGES += \
     libprotobuf-cpp-lite
 
 PRODUCT_PACKAGES += \
-    android.hardware.drm@1.0-impl \
+    android.hardware.drm@1.0-impl:32 \
     android.hardware.drm@1.0-service \
     android.hardware.drm@1.0-service.widevine
 
@@ -204,12 +219,12 @@ PRODUCT_PACKAGES += \
 
 # Gatekeeper HAL
 PRODUCT_PACKAGES += \
-    android.hardware.gatekeeper@1.0-impl \
+    android.hardware.gatekeeper@1.0-impl:64 \
     android.hardware.gatekeeper@1.0-service
 
 # GNSS HAL
 PRODUCT_PACKAGES += \
-    android.hardware.gnss@1.0-impl-qti \
+    android.hardware.gnss@1.0-impl-qti:64 \
     android.hardware.gnss@1.0-service-qti
 
 # GPS
@@ -232,9 +247,9 @@ PRODUCT_COPY_FILES += \
 
 # Healthd
 PRODUCT_PACKAGES += \
-    android.hardware.health@1.0-impl \
-    android.hardware.health@1.0-convert \
-    android.hardware.health@1.0-service \
+    android.hardware.health@2.0-impl \
+    android.hardware.health@2.0-convert \
+    android.hardware.health@2.0-service \
     chargeonlymode
 
 # HIDL
@@ -274,7 +289,7 @@ PRODUCT_COPY_FILES += \
 
 # Keymaster
 PRODUCT_PACKAGES += \
-    android.hardware.keymaster@3.0-impl \
+    android.hardware.keymaster@3.0-impl:64 \
     android.hardware.keymaster@3.0-service
 
 # Libshims
@@ -287,7 +302,7 @@ PRODUCT_PACKAGES += \
     lights.msm8937
 
 PRODUCT_PACKAGES += \
-    android.hardware.light@2.0-impl \
+    android.hardware.light@2.0-impl:64 \
     android.hardware.light@2.0-service
 
 # IRQ
@@ -378,8 +393,7 @@ PRODUCT_COPY_FILES += \
 
 # Sensors
 PRODUCT_PACKAGES += \
-    android.hardware.sensors@1.0-impl \
-    android.hardware.sensors@1.0-service
+    android.hardware.sensors@1.0-impl:64
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/sensors/hals.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/hals.conf \
