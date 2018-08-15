@@ -305,6 +305,16 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/keylayout/msm8952-sku1-snd-card_Button_Jack.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/msm8952-sku1-snd-card_Button_Jack.kl \
     $(LOCAL_PATH)/keylayout/uinput-fpc.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/uinput-fpc.kl
 
+# VR packages
+PRODUCT_PACKAGES += \
+    android.hardware.vr@1.0-service \
+    android.hardware.vr@1.0-impl \
+    android.hardware.vr@1.0 \
+    vr_hwc \
+    libdvr \
+    libpvr \
+    vr.land
+
 # Keymaster
 PRODUCT_PACKAGES += \
     android.hardware.keymaster@3.0-impl \
