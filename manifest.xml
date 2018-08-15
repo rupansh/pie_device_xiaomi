@@ -60,7 +60,7 @@
     <hal format="hidl">
         <name>android.hardware.camera.provider</name>
         <transport>hwbinder</transport>
-        <version>2.4</version>
+        <version>1.0</version>
         <interface>
             <name>ICameraProvider</name>
             <instance>legacy/0</instance>
@@ -261,6 +261,15 @@
         <version>2.0</version>
         <interface>
             <name>ISoundTriggerHw</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
+        <name>android.hardware.thermal</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IThermal</name>
             <instance>default</instance>
         </interface>
     </hal>
@@ -620,6 +629,15 @@
         <interface>
             <name>IRTPService</name>
             <instance>imsrtpservice</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.qti.voiceprint</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IQtiVoicePrintService</name>
+            <instance>default</instance>
         </interface>
     </hal>
 </manifest>
