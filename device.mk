@@ -239,7 +239,10 @@ PRODUCT_PACKAGES += \
     gps.msm8937 \
     libgnss \
     libgnsspps \
-    libcurl
+    libcurl \
+    libgps.utils \
+    android.hardware.gnss@1.0-impl:64 \
+    android.hardware.gnss@1.0-impl
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/etc/flp.conf:$(TARGET_COPY_OUT_VENDOR)/etc/flp.conf \
