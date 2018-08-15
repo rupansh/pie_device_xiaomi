@@ -132,6 +132,7 @@ PRODUCT_PROPERTY_OVERRIDES += aaudio.mmap_exclusive_policy=2
 
 # Bluetooth HAL
 PRODUCT_PACKAGES += \
+    android.hardware.bluetooth@1.0-service \
     android.hardware.bluetooth@1.0-impl \
     android.hardware.bluetooth@1.0-impl:64 \
     libbt-vendor
@@ -187,7 +188,6 @@ PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-service \
     android.hardware.contexthub@1.0-service \
     android.hardware.sensors@1.0-service \
-    android.hardware.keymaster@3.0-service \
     android.hardware.keymaster@3.0-service.rc
 
 # Display
