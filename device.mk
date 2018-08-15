@@ -18,7 +18,8 @@
 
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += \
-    $(LOCAL_PATH)/overlay
+    $(LOCAL_PATH)/overlay \
+    $(LOCAL_PATH)/overlay-new
 
 # Boot animation
 TARGET_SCREEN_HEIGHT := 1280
@@ -501,6 +502,15 @@ PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
 # Disable rescue party
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.disable_rescue=true
+
+# Google Sans fonts
+PRODUCT_COPY_FILES += \
+    frameworks/base/data/fonts/GoogleSans-Regular.ttf:system/fonts/GoogleSans-Regular.ttf \
+    frameworks/base/data/fonts/GoogleSans-Bold.ttf:system/fonts/GoogleSans-Bold.ttf \
+    frameworks/base/data/fonts/GoogleSans-BoldItalic.ttf:system/fonts/GoogleSans-BoldItalic.ttf \
+    frameworks/base/data/fonts/GoogleSans-Medium.ttf:system/fonts/GoogleSans-Medium.ttf \
+    frameworks/base/data/fonts/GoogleSans-MediumItalic.ttf:system/fonts/GoogleSans-MediumItalic.ttf
+
 
 # Inherit proprietary files
 $(call inherit-product-if-exists, vendor/xiaomi/land/land-vendor.mk)
