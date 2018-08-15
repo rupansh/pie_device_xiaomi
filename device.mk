@@ -391,7 +391,9 @@ PRODUCT_COPY_FILES += \
 
 # Sensors
 PRODUCT_PACKAGES += \
-    android.hardware.sensors@1.0-impl:64
+    android.hardware.sensors@1.0-impl:64 \
+    android.hardware.contexthub@1.0-service:64 \
+    android.hardware.contexthub@1.0-impl.nanohub:64    
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/sensors/hals.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/hals.conf \
