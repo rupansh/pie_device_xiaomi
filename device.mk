@@ -174,6 +174,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.ir@1.0-impl \
 
+PRODUCT_PACKAGES += \
+    android.hardware.audio@2.0-service \
+    android.hardware.contexthub@1.0-service \
+    android.hardware.sensors@1.0-service
+
 # Display
 PRODUCT_PACKAGES += \
     copybit.msm8937 \
@@ -392,7 +397,6 @@ PRODUCT_COPY_FILES += \
 # Sensors
 PRODUCT_PACKAGES += \
     android.hardware.sensors@1.0-impl:64 \
-    android.hardware.contexthub@1.0-service:64 \
     android.hardware.contexthub@1.0-impl.nanohub:64    
 
 PRODUCT_COPY_FILES += \
