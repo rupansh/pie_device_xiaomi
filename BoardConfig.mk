@@ -215,7 +215,7 @@ TARGET_RIL_VARIANT := caf
 TARGET_RECOVERY_FSTAB 		 := $(DEVICE_PATH)/rootdir/fstab.qcom
 
 # SELinux
-BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy
+#permissive lul
 
 # Wi-Fi
 BOARD_HAS_QCOM_WLAN := true
