@@ -52,6 +52,8 @@ LOCAL_CFLAGS += -DSYSTEM_HEADER_PREFIX=sys
 
 LOCAL_CFLAGS += -DHAS_MULTIMEDIA_HINTS -D_ANDROID
 
+# Meh werrors
+LOCAL_CFLAGS += -Wno-gnu-designator -Wno-overloaded-virtual -Wno-unused-private-field -Wno-unused-label -Wno-tautological-pointer-compare
 
 #use media extension
 ifeq ($(TARGET_USES_MEDIA_EXTENSIONS), true)
@@ -79,7 +81,7 @@ LOCAL_C_INCLUDES := \
 
 #HAL 1.0 Include paths
 LOCAL_C_INCLUDES += \
-        $(call project-path-for,qcom-camera)/QCamera2/HAL
+        hardware/qcom/camera/QCamera2/HAL
 
 LOCAL_C_INCLUDES += $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include
 LOCAL_ADDITIONAL_DEPENDENCIES := $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr

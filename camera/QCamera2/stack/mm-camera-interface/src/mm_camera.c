@@ -259,7 +259,6 @@ int32_t mm_camera_open(mm_camera_obj_t *my_obj)
     uint8_t sleep_msec=MM_CAMERA_DEV_OPEN_RETRY_SLEEP;
     int cam_idx = 0;
     const char *dev_name_value = NULL;
-    char prop[PROPERTY_VALUE_MAX];
     int l_errno = 0;
     pthread_condattr_t cond_attr;
 
@@ -2170,7 +2169,6 @@ int32_t mm_camera_reg_stream_buf_cb(mm_camera_obj_t *my_obj,
         mm_camera_stream_cb_type cb_type, void *userdata)
 {
     int rc = 0;
-    mm_stream_t *stream = NULL;
     mm_stream_data_cb_t buf_cb;
     mm_channel_t * ch_obj =
             mm_camera_util_get_channel_by_handler(my_obj, ch_id);
@@ -2259,33 +2257,6 @@ static module_debug_t cam_loginfo[(int)CAM_LAST_MODULE] = {
  *
  *  Return: logging level
  **/
-static cam_global_debug_level_t cam_get_dbg_level(const char *module,
-  char *pValue) {
-
-  cam_global_debug_level_t rc = CAM_GLBL_DBG_NONE;
-
-  if (!strcmp(pValue, "none")) {
-    rc = CAM_GLBL_DBG_NONE;
-  } else if (!strcmp(pValue, "warn")) {
-    rc = CAM_GLBL_DBG_WARN;
-  } else if (!strcmp(pValue, "debug")) {
-    rc = CAM_GLBL_DBG_DEBUG;
-  } else if (!strcmp(pValue, "error")) {
-    rc = CAM_GLBL_DBG_ERR;
-  } else if (!strcmp(pValue, "low")) {
-    rc = CAM_GLBL_DBG_LOW;
-  } else if (!strcmp(pValue, "high")) {
-    rc = CAM_GLBL_DBG_HIGH;
-  } else if (!strcmp(pValue, "info")) {
-    rc = CAM_GLBL_DBG_INFO;
-  } else {
-    ALOGE("Invalid %s debug log level %s\n", module, pValue);
-  }
-
-  ALOGD("%s debug log level: %s\n", module, cam_dbg_level_to_str[rc]);
-
-  return rc;
-}
 
 /** cam_vsnprintf
  *    @pdst:   destination buffer pointer
