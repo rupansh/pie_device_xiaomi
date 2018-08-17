@@ -216,10 +216,6 @@ PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-service \
     android.hardware.drm@1.0-service.widevine
 
-# Fingerprint
-PRODUCT_PACKAGES += \
-    android.hardware.biometrics.fingerprint@2.0-service.custom
-
 # FM
 PRODUCT_PACKAGES += \
     FMRadio \
@@ -389,7 +385,7 @@ PRODUCT_COPY_FILES += \
 
 # Power
 PRODUCT_PACKAGES += \
-    android.hardware.power@1.0-service.land
+    android.hardware.power@1.0-service-qti
 
 # RCS
 PRODUCT_PACKAGES += \
