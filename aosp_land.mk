@@ -26,7 +26,7 @@ $(call inherit-product, $(LOCAL_PATH)/device.mk)
 $(call inherit-product, $(LOCAL_PATH)/utils.mk)
 
 # Inherit some common illusion stuff
-$(call inherit-product, vendor/aosip/config/common_full_phone.mk)
+$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
 PRODUCT_BRAND := Xiaomi
 PRODUCT_MODEL := Redmi 3S
