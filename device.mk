@@ -313,6 +313,14 @@ PRODUCT_PACKAGES += \
     libshim_c \
     libshim_cameraservice
 
+# Power
+PRODUCT_PACKAGES += \
+    power.msm8937
+
+PRODUCT_PACKAGES += \
+    android.hardware.power@1.0-service \
+    android.hardware.power@1.0-impl
+
 # Lights
 PRODUCT_PACKAGES += \
     lights.msm8937
@@ -382,10 +390,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/perfboostsconfig.xml:$(TARGET_COPY_OUT_VENDOR)/etc/perf/perfboostsconfig.xml \
     $(LOCAL_PATH)/configs/perf-profile0.conf:$(TARGET_COPY_OUT_VENDOR)/etc/perf/perf-profile0.conf
-
-# Power
-PRODUCT_PACKAGES += \
-    android.hardware.power@1.0-service-qti
 
 # RCS
 PRODUCT_PACKAGES += \
