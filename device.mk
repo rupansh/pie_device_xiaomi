@@ -166,8 +166,8 @@ PRODUCT_PACKAGES += \
 
 # Configstore
 PRODUCT_PACKAGES += \
-    android.hardware.configstore@1.0-impl \
-    android.hardware.configstore@1.0-service
+    android.hardware.configstore@1.1-impl \
+    android.hardware.configstore@1.1-service
 
 # Consumerir
 PRODUCT_PACKAGES += \
@@ -178,7 +178,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-service \
-    android.hardware.contexthub@1.0-service \
     android.hardware.sensors@1.0-service \
     android.hardware.keymaster@3.0-service.rc \
     android.hardware.graphics.composer@2.1-service \
@@ -221,6 +220,9 @@ PRODUCT_PACKAGES += \
     FMRadio \
     libfmjni
 
+PRODUCT_PACKAGES += \
+    android.hardware.broadcastradio@1.0-impl
+
 # Gatekeeper HAL
 PRODUCT_PACKAGES += \
     android.hardware.gatekeeper@1.0-impl \
@@ -253,10 +255,9 @@ PRODUCT_COPY_FILES += \
 
 # Healthd
 PRODUCT_PACKAGES += \
-    android.hardware.health@2.0-impl \
-    android.hardware.health@2.0-convert \
-    android.hardware.health@2.0-service \
-    chargeonlymode
+    android.hardware.health@1.0-impl \
+    android.hardware.health@1.0-convert \
+    android.hardware.health@1.0-service \
 
 # HIDL
 PRODUCT_PACKAGES += \
@@ -433,6 +434,10 @@ PRODUCT_PACKAGES += \
     textclassifier.smartselection.bundle1
 
 # Thermal
+PRODUCT_PACKAGES += \
+    android.hardware.thermal@1.0-impl \
+    android.hardware.thermal@1.0-service
+
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/thermal-engine.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine.conf
 
