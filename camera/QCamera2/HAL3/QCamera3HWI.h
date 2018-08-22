@@ -31,13 +31,13 @@
 #define __QCAMERA3HARDWAREINTERFACE_H__
 
 // System dependencies
+#include <camera/CameraMetadata.h>
 #include <pthread.h>
 #include <utils/KeyedVector.h>
 #include <utils/List.h>
-#include "CameraMetadata.h"
 
 // Camera dependencies
-#include "hardware/camera3.h"
+#include "camera3.h"
 #include "QCamera3Channel.h"
 #include "QCamera3CropRegionMapper.h"
 #include "QCamera3HALHeader.h"
@@ -51,10 +51,7 @@ extern "C" {
 
 using namespace android;
 
-
 namespace qcamera {
-
-using ::android::hardware::camera::common::V1_0::helper::CameraMetadata;
 
 #ifndef TRUE
 #define TRUE 1
@@ -347,7 +344,6 @@ private:
     int8_t  mSupportedFaceDetectMode;
     uint8_t m_bTnrPreview;
     uint8_t m_bTnrVideo;
-    uint8_t m_debug_avtimer;
 
     /* Data structure to store pending request */
     typedef struct {

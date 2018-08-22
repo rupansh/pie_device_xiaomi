@@ -1,4 +1,4 @@
-/* Copyright (c) 2012-2017, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2012-2014, 2016, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -260,7 +260,6 @@ int32_t mm_camera_open(mm_camera_obj_t *my_obj)
     int cam_idx = 0;
     const char *dev_name_value = NULL;
     int l_errno = 0;
-    pthread_condattr_t cond_attr;
 
     LOGD("begin\n");
 
@@ -323,16 +322,11 @@ int32_t mm_camera_open(mm_camera_obj_t *my_obj)
         rc = -1;
         goto on_error;
     }
-
-    pthread_condattr_init(&cond_attr);
-    pthread_condattr_setclock(&cond_attr, CLOCK_MONOTONIC);
-
     pthread_mutex_init(&my_obj->msg_lock, NULL);
 
     pthread_mutex_init(&my_obj->cb_lock, NULL);
     pthread_mutex_init(&my_obj->evt_lock, NULL);
-    pthread_cond_init(&my_obj->evt_cond, &cond_attr);
-    pthread_condattr_destroy(&cond_attr);
+    pthread_cond_init(&my_obj->evt_cond, NULL);
 
     LOGD("Launch evt Thread in Cam Open");
     snprintf(my_obj->evt_thread.threadName, THREAD_NAME_SIZE, "CAM_Dispatch");
@@ -421,7 +415,6 @@ int32_t mm_camera_close(mm_camera_obj_t *my_obj)
     pthread_cond_destroy(&my_obj->evt_cond);
 
     pthread_mutex_unlock(&my_obj->cam_lock);
-
     return 0;
 }
 
@@ -1737,7 +1730,7 @@ void mm_camera_util_wait_for_event(mm_camera_obj_t *my_obj,
 
     pthread_mutex_lock(&my_obj->evt_lock);
     while (!(my_obj->evt_rcvd.server_event_type & evt_mask)) {
-        clock_gettime(CLOCK_MONOTONIC, &ts);
+        clock_gettime(CLOCK_REALTIME, &ts);
         ts.tv_sec += WAIT_TIMEOUT;
         rc = pthread_cond_timedwait(&my_obj->evt_cond, &my_obj->evt_lock, &ts);
         if (rc) {
@@ -2257,6 +2250,34 @@ static module_debug_t cam_loginfo[(int)CAM_LAST_MODULE] = {
  *
  *  Return: logging level
  **/
+__unused
+static cam_global_debug_level_t cam_get_dbg_level(const char *module,
+  char *pValue) {
+
+  cam_global_debug_level_t rc = CAM_GLBL_DBG_NONE;
+
+  if (!strcmp(pValue, "none")) {
+    rc = CAM_GLBL_DBG_NONE;
+  } else if (!strcmp(pValue, "warn")) {
+    rc = CAM_GLBL_DBG_WARN;
+  } else if (!strcmp(pValue, "debug")) {
+    rc = CAM_GLBL_DBG_DEBUG;
+  } else if (!strcmp(pValue, "error")) {
+    rc = CAM_GLBL_DBG_ERR;
+  } else if (!strcmp(pValue, "low")) {
+    rc = CAM_GLBL_DBG_LOW;
+  } else if (!strcmp(pValue, "high")) {
+    rc = CAM_GLBL_DBG_HIGH;
+  } else if (!strcmp(pValue, "info")) {
+    rc = CAM_GLBL_DBG_INFO;
+  } else {
+    ALOGE("Invalid %s debug log level %s\n", module, pValue);
+  }
+
+  ALOGD("%s debug log level: %s\n", module, cam_dbg_level_to_str[rc]);
+
+  return rc;
+}
 
 /** cam_vsnprintf
  *    @pdst:   destination buffer pointer

@@ -7,6 +7,7 @@ include $(CLEAR_VARS)
 LOCAL_SRC_FILES := \
         util/QCameraBufferMaps.cpp \
         util/QCameraCmdThread.cpp \
+        util/QCameraDisplay.cpp \
         util/QCameraFlash.cpp \
         util/QCameraPerf.cpp \
         util/QCameraQueue.cpp \
@@ -24,14 +25,7 @@ LOCAL_SRC_FILES += \
         HAL3/QCamera3CropRegionMapper.cpp \
         HAL3/QCamera3StreamMem.cpp
 
-LOCAL_CFLAGS := -Wall -Wextra -Werror -Wno-unused-parameter -Wno-unused-variable
-
 #HAL 1.0 source
-
-ifeq ($(TARGET_SUPPORT_HAL1),false)
-LOCAL_CFLAGS += -DQCAMERA_HAL3_SUPPORT
-else
-LOCAL_CFLAGS += -DQCAMERA_HAL1_SUPPORT
 LOCAL_SRC_FILES += \
         HAL/QCamera2HWI.cpp \
         HAL/QCameraMuxer.cpp \
@@ -42,25 +36,22 @@ LOCAL_SRC_FILES += \
         HAL/QCameraPostProc.cpp \
         HAL/QCamera2HWICallbacks.cpp \
         HAL/QCameraParameters.cpp \
-        HAL/CameraParameters.cpp \
         HAL/QCameraParametersIntf.cpp \
         HAL/QCameraThermalAdapter.cpp
-endif
+
+LOCAL_CFLAGS := -Wall -Wextra -Werror -Wno-unused-parameter -Wno-unused-variable
 
 # System header file path prefix
 LOCAL_CFLAGS += -DSYSTEM_HEADER_PREFIX=sys
 
 LOCAL_CFLAGS += -DHAS_MULTIMEDIA_HINTS -D_ANDROID
 
-# Meh werrors
-LOCAL_CFLAGS += -Wno-gnu-designator -Wno-overloaded-virtual -Wno-unused-private-field -Wno-unused-label -Wno-tautological-pointer-compare
 
 #use media extension
 ifeq ($(TARGET_USES_MEDIA_EXTENSIONS), true)
 LOCAL_CFLAGS += -DUSE_MEDIA_EXTENSIONS
 endif
 
-LOCAL_CFLAGS += -std=c++11 -std=gnu++0x
 #HAL 1.0 Flags
 LOCAL_CFLAGS += -DDEFAULT_DENOISE_MODE_ON -DHAL3 -DQCAMERA_REDEFINE_LOG
 
@@ -73,18 +64,20 @@ LOCAL_C_INCLUDES := \
         $(LOCAL_PATH)/util \
         $(LOCAL_PATH)/HAL3 \
         hardware/libhardware/include/hardware \
-        hardware/qcom/media-caf/libstagefrighthw \
-        hardware/qcom/media-caf/mm-core/inc \
+        $(call project-path-for,qcom-media)/libstagefrighthw \
+        $(call project-path-for,qcom-media)/mm-core/inc \
         system/core/include/cutils \
         system/core/include/system \
         system/media/camera/include/system
 
 #HAL 1.0 Include paths
 LOCAL_C_INCLUDES += \
-        hardware/qcom/camera/QCamera2/HAL
+        $(LOCAL_PATH)/HAL
 
+ifeq ($(TARGET_COMPILE_WITH_MSM_KERNEL),true)
 LOCAL_C_INCLUDES += $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include
 LOCAL_ADDITIONAL_DEPENDENCIES := $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr
+endif
 ifeq ($(TARGET_TS_MAKEUP),true)
 LOCAL_CFLAGS += -DTARGET_TS_MAKEUP
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/HAL/tsMakeuplib/include
@@ -101,20 +94,16 @@ endif
 LOCAL_C_INCLUDES += \
         $(TARGET_OUT_HEADERS)/qcom/display
 LOCAL_C_INCLUDES += \
-        hardware/qcom/display-caf/libqservice
-LOCAL_SHARED_LIBRARIES := liblog libhardware libutils libcutils libdl libsync
+        $(call project-path-for,qcom-display)/libqservice
+LOCAL_SHARED_LIBRARIES := libcamera_client liblog libhardware libutils libcutils libdl libsync libgui
 LOCAL_SHARED_LIBRARIES += libmmcamera_interface libmmjpeg_interface libui libcamera_metadata
 LOCAL_SHARED_LIBRARIES += libqdMetaData libqservice libbinder
 ifeq ($(TARGET_TS_MAKEUP),true)
 LOCAL_SHARED_LIBRARIES += libts_face_beautify_hal libts_detected_face_hal
 endif
 
-LOCAL_STATIC_LIBRARIES := android.hardware.camera.common@1.0-helper
-
-
 LOCAL_MODULE_RELATIVE_PATH := hw
 LOCAL_MODULE := camera.$(TARGET_BOARD_PLATFORM)
-LOCAL_VENDOR_MODULE := true
 LOCAL_MODULE_TAGS := optional
 
 LOCAL_32_BIT_ONLY := $(BOARD_QTI_CAMERA_32BIT_ONLY)

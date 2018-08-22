@@ -44,6 +44,7 @@
 #include "QCameraTrace.h"
 
 // Media dependencies
+#include "OMX_QCOMExtns.h"
 #ifdef USE_MEDIA_EXTENSIONS
 #include <media/hardware/HardwareAPI.h>
 typedef struct VideoNativeHandleMetadata media_metadata_buffer;
@@ -652,7 +653,7 @@ int QCameraMemoryPool::findBufferLocked(
         size_t size, bool cached, cam_stream_type_t streamType)
 {
     int rc = NAME_NOT_FOUND;
-    size_t alignsize = (size + 4095U) & (~4095U);
+
     if (mPools[streamType].empty()) {
         return NAME_NOT_FOUND;
     }
@@ -660,7 +661,7 @@ int QCameraMemoryPool::findBufferLocked(
     List<struct QCameraMemory::QCameraMemInfo>::iterator it = mPools[streamType].begin();
     if (streamType == CAM_STREAM_TYPE_OFFLINE_PROC) {
         for( ; it != mPools[streamType].end() ; it++) {
-            if( ((*it).size == alignsize) &&
+            if( ((*it).size == size) &&
                     ((*it).heap_id == heap_id) &&
                     ((*it).cached == cached) ) {
                 memInfo = *it;
@@ -1052,7 +1053,7 @@ QCameraStreamMemory::QCameraStreamMemory(camera_request_memory memory,
         void* cbCookie,
         bool cached,
         QCameraMemoryPool *pool,
-        cam_stream_type_t streamType, cam_stream_buf_type bufType)
+        cam_stream_type_t streamType, __unused cam_stream_buf_type bufType)
     :QCameraMemory(cached, pool, streamType),
      mGetMemory(memory),
      mCallbackCookie(cbCookie)
@@ -1290,7 +1291,7 @@ QCameraVideoMemory::QCameraVideoMemory(camera_request_memory memory, void* cbCoo
     mMetaBufCount = 0;
     mBufType = bufType;
     //Set Default color conversion format
-    mUsage = private_handle_t::PRIV_FLAGS_ITU_R_601_FR;
+    mUsage = private_handle_t::PRIV_FLAGS_ITU_R_709;
 
     //Set Default frame format
     mFormat = OMX_COLOR_FormatYUV420SemiPlanar;
@@ -1672,8 +1673,7 @@ int QCameraVideoMemory::closeNativeHandle(const void *data, bool metadata)
             return BAD_VALUE;
         }
     } else {
-        LOGE("Not of type video meta buffer. Failed");
-        return BAD_VALUE;
+        LOGW("Warning: Not of type video meta buffer");
     }
 #endif
     return rc;
@@ -1985,7 +1985,6 @@ int QCameraGrallocMemory::displayBuffer(uint32_t index)
 int32_t QCameraGrallocMemory::enqueueBuffer(uint32_t index, nsecs_t timeStamp)
 {
     int32_t err = NO_ERROR;
-    int32_t dequeuedIdx = BAD_INDEX;
 
     if (BUFFER_NOT_OWNED == mLocalFlag[index]) {
         LOGE("buffer to be enqueued is not owned");
@@ -2026,7 +2025,6 @@ int32_t QCameraGrallocMemory::dequeueBuffer()
     int32_t dequeuedIdx = BAD_INDEX;
     buffer_handle_t *buffer_handle = NULL;
     int32_t stride = 0;
-    uint8_t dequeueCnt = 1;
 
     dequeuedIdx = BAD_INDEX;
     err = mWindow->dequeue_buffer(mWindow, &buffer_handle, &stride);

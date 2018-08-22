@@ -35,7 +35,7 @@
 // System dependencies
 #include <stdlib.h>
 #include <dlfcn.h>
-#include <utils/Timers.h>
+
 // Camera dependencies
 #include "QCameraPerf.h"
 #include "QCameraTrace.h"
@@ -102,7 +102,6 @@ void QCameraPerfLock::lock_init()
 {
     const char *rc;
     char value[PROPERTY_VALUE_MAX];
-    int len;
 
     LOGD("E");
     Mutex::Autolock lock(mLock);

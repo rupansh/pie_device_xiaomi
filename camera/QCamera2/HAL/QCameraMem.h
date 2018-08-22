@@ -35,9 +35,6 @@
 #include <utils/Mutex.h>
 #include <utils/List.h>
 
-//Media depedancies
-#include "OMX_QCOMExtns.h"
-
 // Display dependencies
 #include "qdMetaData.h"
 
@@ -54,14 +51,8 @@ class QCameraMemoryPool;
 
 //OFFSET, SIZE, USAGE, TIMESTAMP, FORMAT
 #define VIDEO_METADATA_NUM_INTS          5
-
 //Buffer identity
-//Note that this macro might have already been
-//defined in OMX_QCOMExtns.h, in which case
-//the local value below will not be used.
-#ifndef VIDEO_METADATA_NUM_COMMON_INTS
 #define VIDEO_METADATA_NUM_COMMON_INTS   1
-#endif
 
 enum QCameraMemType {
     QCAMERA_MEM_TYPE_DEFAULT      = 0,

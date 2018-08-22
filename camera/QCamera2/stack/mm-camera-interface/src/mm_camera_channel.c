@@ -505,7 +505,6 @@ static void mm_channel_process_stream_buf(mm_camera_cmdcb_t * cmd_cb,
             }
         }
         if (info.num_nodes > 0) {
-
             /* decrease pending_cnt */
             if (MM_CAMERA_SUPER_BUF_NOTIFY_BURST == notify_mode) {
                 ch_obj->pending_cnt--;
@@ -1285,9 +1284,7 @@ uint32_t mm_channel_add_stream(mm_channel_t *my_obj)
         LOGE("streams reach max, no more stream allowed to add");
         return s_hdl;
     }
-    pthread_condattr_t cond_attr;
-    pthread_condattr_init(&cond_attr);
-    pthread_condattr_setclock(&cond_attr, CLOCK_MONOTONIC);
+
     /* initialize stream object */
     memset(stream_obj, 0, sizeof(mm_stream_t));
     stream_obj->fd = -1;
@@ -1296,8 +1293,7 @@ uint32_t mm_channel_add_stream(mm_channel_t *my_obj)
     pthread_mutex_init(&stream_obj->buf_lock, NULL);
     pthread_mutex_init(&stream_obj->cb_lock, NULL);
     pthread_mutex_init(&stream_obj->cmd_lock, NULL);
-    pthread_cond_init(&stream_obj->buf_cond, &cond_attr);
-    pthread_condattr_destroy(&cond_attr);
+    pthread_cond_init(&stream_obj->buf_cond, NULL);
     memset(stream_obj->buf_status, 0,
             sizeof(stream_obj->buf_status));
     stream_obj->state = MM_STREAM_STATE_INITED;

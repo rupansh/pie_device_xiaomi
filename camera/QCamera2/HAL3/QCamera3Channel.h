@@ -39,7 +39,7 @@
 // Camera dependencies
 #include "cam_intf.h"
 #include "cam_types.h"
-#include "hardware/camera3.h"
+#include "camera3.h"
 #include "QCamera3HALHeader.h"
 #include "QCamera3Mem.h"
 #include "QCamera3PostProc.h"
@@ -285,6 +285,7 @@ public:
     virtual uint32_t getStreamTypeMask();
     virtual int32_t queueBatchBuf();
     virtual int32_t initialize(cam_is_type_t isType);
+    using QCamera3ProcessingChannel::request;
     virtual int32_t request(buffer_handle_t *buffer, uint32_t frameNumber);
     virtual reprocess_type_t getReprocessType();
 
@@ -410,6 +411,7 @@ public:
             QCamera3Channel *metadataChannel);
     ~QCamera3YUVChannel();
     virtual int32_t initialize(cam_is_type_t isType);
+    using QCamera3ProcessingChannel::request;
     virtual int32_t request(buffer_handle_t *buffer,
             uint32_t frameNumber,
             camera3_stream_buffer_t* pInputBuffer,
