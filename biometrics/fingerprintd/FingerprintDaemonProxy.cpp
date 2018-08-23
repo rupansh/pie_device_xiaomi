@@ -21,8 +21,6 @@
 #include <hardware/hardware.h>
 #include <hardware/fingerprint.h>
 #include <hardware/hw_auth_token.h>
-#include <keystore/IKeystoreService.h>
-#include <keystore/keystore.h> // for error codes
 #include <utils/Log.h>
 
 #include "FingerprintDaemonProxy.h"
@@ -86,6 +84,9 @@ void FingerprintDaemonProxy::hal_notify_callback(const fingerprint_msg_t *msg) {
     }
 }
 
+#if 1
+void FingerprintDaemonProxy::notifyKeystore(const uint8_t __unused *auth_token, const size_t __unused auth_token_length) {
+#else
 void FingerprintDaemonProxy::notifyKeystore(const uint8_t *auth_token, const size_t auth_token_length) {
     if (auth_token != NULL && auth_token_length > 0) {
         // TODO: cache service?
@@ -101,6 +102,7 @@ void FingerprintDaemonProxy::notifyKeystore(const uint8_t *auth_token, const siz
             ALOGE("Unable to communicate with KeyStore");
         }
     }
+#endif
 }
 
 void FingerprintDaemonProxy::init(const sp<IFingerprintDaemonCallback>& callback) {
