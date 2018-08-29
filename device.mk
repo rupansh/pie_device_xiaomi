@@ -444,33 +444,20 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     vndk-sp
 
-# WiFi HAL
-PRODUCT_PACKAGES += \
-    android.hardware.wifi@1.0-service
-
 PRODUCT_COPY_FILES += \
     prebuilts/vndk/v27/arm64/arch-arm64-armv8-a/shared/vndk-core/android.hardware.gnss@1.0.so:system/lib64/android.hardware.gnss@1.0-v27.so
 
-# Wi-Fi
+# WiFi
 PRODUCT_PACKAGES += \
+    android.hardware.wifi@1.0-service \
     libcld80211 \
     hostapd \
     libqsap_sdk \
     libQWiFiSoftApCfg \
     wificond \
-    wifilogd \
     libwpa_client \
     wpa_supplicant \
-    wpa_supplicant.conf \
-    libwifikeystorehal \
-    android.hardware.wifi.offload@1.0:64 \
-    android.hardware.wifi.supplicant@1.0:64 \
-    android.hardware.wifi.supplicant@1.1:64 \
-    android.hardware.hostapd@1.0:64 \
-    android.hardware.wifi@1.0:64 \
-    android.hardware.wifi@1.1:64 \
-    android.hardware.wifi@1.2:64
-
+    wpa_supplicant.conf
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/hostapd.accept:system/etc/hostapd/hostapd.accept \
@@ -482,7 +469,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/fstman.ini:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/fstman.ini \
     $(LOCAL_PATH)/wifi/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
-    $(LOCAL_PATH)/wifi/WCNSS_qcom_cfg.ini:system/etc/wifi/WCNSS_qcom_cfg.ini
+    $(LOCAL_PATH)/wifi/WCNSS_qcom_cfg.ini:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/WCNSS_qcom_cfg.ini
 
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0
