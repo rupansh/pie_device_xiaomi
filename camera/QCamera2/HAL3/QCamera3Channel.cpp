@@ -36,8 +36,9 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "hardware/gralloc.h"
+#include <utils/Timers.h>
 #include <sys/stat.h>
-#include "gralloc.h"
 
 // Camera dependencies
 #include "QCamera3Channel.h"
@@ -1447,8 +1448,8 @@ int32_t QCamera3ProcessingChannel::setReprocConfig(reprocess_config_t &reproc_cf
                     &reproc_cfg.input_stream_plane_info);
             break;
         case CAM_STREAM_TYPE_VIDEO:
-            rc = mm_stream_calc_offset_video(reproc_cfg.stream_format,
-                    &reproc_cfg.input_stream_dim,
+            rc = mm_stream_calc_offset_video(getStreamByIndex(0)->getStreamInfo(),
+                    reproc_cfg.padding,
                     &reproc_cfg.input_stream_plane_info);
             break;
         case CAM_STREAM_TYPE_RAW:
@@ -1765,6 +1766,15 @@ int32_t QCamera3RegularChannel::initialize(cam_is_type_t isType)
                          mCamera3Stream->rotation);
             return -EINVAL;
         }
+
+        // Camera3/HAL3 spec expecting counter clockwise rotation but CPP HW is
+        // doing Clockwise rotation and so swap it.
+        if (mRotation == ROTATE_90) {
+            mRotation = ROTATE_270;
+        } else if (mRotation == ROTATE_270) {
+            mRotation = ROTATE_90;
+        }
+
     } else if (mCamera3Stream->rotation != CAMERA3_STREAM_ROTATION_0) {
         LOGE("Rotation %d is not supported by stream type %d",
                 mCamera3Stream->rotation,

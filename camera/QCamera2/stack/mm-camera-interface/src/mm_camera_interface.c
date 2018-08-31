@@ -40,8 +40,6 @@
 #define IOCTL_H <SYSTEM_HEADER_PREFIX/ioctl.h>
 #include IOCTL_H
 
-#define EXTRA_ENTRY 6
-
 // Camera dependencies
 #include "mm_camera_dbg.h"
 #include "mm_camera_interface.h"
@@ -1714,14 +1712,8 @@ uint8_t get_num_of_cameras()
     char subdev_name[32];
     int32_t sd_fd = -1;
     struct sensor_init_cfg_data cfg;
-    char prop[PROPERTY_VALUE_MAX];
 
     LOGD("E");
-
-    property_get("vold.decrypt", prop, "0");
-    int decrypt = atoi(prop);
-    if (decrypt == 1)
-     return 0;
 
     /* lock the mutex */
     pthread_mutex_lock(&g_intf_lock);
@@ -1784,16 +1776,13 @@ uint8_t get_num_of_cameras()
 
     cfg.cfgtype = CFG_SINIT_PROBE_WAIT_DONE;
     cfg.cfg.setting = NULL;
-    if (ioctl(sd_fd, VIDIOC_MSM_SENSOR_INIT_CFG, &cfg) < 0) {
-        LOGI("failed...Camera Daemon may not up so try again");
-        for(i = 0; i < (MM_CAMERA_EVT_ENTRY_MAX + EXTRA_ENTRY); i++) {
-            if (ioctl(sd_fd, VIDIOC_MSM_SENSOR_INIT_CFG, &cfg) < 0) {
-                LOGI("failed...Camera Daemon may not up so try again");
-                continue;
-            }
-            else
-                break;
+    for (i = 0; i < MM_CAMERA_EVT_ENTRY_MAX; i++) {
+        if (ioctl(sd_fd, VIDIOC_MSM_SENSOR_INIT_CFG, &cfg) < 0) {
+            LOGI("failed...Camera Daemon may not up so try again");
+            continue;
         }
+        else
+            break;
     }
     close(sd_fd);
     dev_fd = -1;
